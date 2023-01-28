@@ -3,6 +3,7 @@ from flask_cors import CORS, cross_origin
 from flask import request
 from datetime import datetime, timedelta
 from flask import jsonify
+from predictor import Predictor
 import json
 
 
@@ -10,12 +11,14 @@ app = Flask(__name__)
 cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
+predictor = Predictor()
+
 
 class DataPoint:
     def __init__(self, date, value):
         self.date = date
         self.value = value
-    
+
     def toJSON(self):
         return self.__dict__
 
@@ -25,15 +28,10 @@ class DataPoint:
 def hello():
     date_str = request.args.get('date')
     date_object = datetime.strptime(date_str, "%Y-%m-%d")
+
+    predicted = predictor.predict(date_object)
     delta = timedelta(days=1)
-    arr = [DataPoint(date_object.strftime("%Y-%m-%d"), 12), 
-    DataPoint((date_object + delta).strftime("%Y-%m-%d"), 2), 
-    DataPoint((date_object + delta * 2).strftime("%Y-%m-%d"), 4), 
-    DataPoint((date_object + delta * 3).strftime("%Y-%m-%d"), 15),
-    DataPoint((date_object + delta * 4).strftime("%Y-%m-%d"), 7),
-    DataPoint((date_object + delta * 5).strftime("%Y-%m-%d"), 18),
-    DataPoint((date_object + delta * 6).strftime("%Y-%m-%d"), 38),
-    DataPoint((date_object + delta * 7).strftime("%Y-%m-%d"), 1)]
+    arr = [DataPoint((date_object + delta * (n + 1)).strftime("%Y-%m-%d"), predicted[n]) for n in range(7)]
     data_points_json = [dp.toJSON() for dp in arr]
     return jsonify(data_points_json)
 

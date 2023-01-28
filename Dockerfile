@@ -1,12 +1,14 @@
 FROM python:3.9-slim-buster
 
-COPY ./app /app
+COPY ./app /opt/app
+COPY requirements.txt /opt/requirements.txt
+COPY model /opt/model
 
-WORKDIR /app
+WORKDIR /opt
 
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 EXPOSE 4000
 
-CMD ["python", "server.py"]
+CMD ["python", "app/server.py"]

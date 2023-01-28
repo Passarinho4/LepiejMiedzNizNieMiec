@@ -1,0 +1,13 @@
+Flask==2.1.0
+flask-cors==3.0.10
+xlrd
+pandas
+numpy
+scipy
+sklearn
+keras
+matplotlib
+tensorflow
+joblib
+sklearn
+scikit-learn
