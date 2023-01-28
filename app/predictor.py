@@ -15,6 +15,7 @@ class Predictor:
         self.features_df = self.features_df.set_index('date')
         self.features_scaler = joblib.load('model/features_scaler.gz')
         self.target_scaler = joblib.load('model/target_scaler.gz')
+        self.errors = joblib.load('model/errors.gz')
         self.sequence_length_days = sequence_length_days
 
     def predict(self, date, prediction_horizon_days=7):
@@ -38,3 +39,6 @@ class Predictor:
             y_pred.append(y_f)
 
         return self.target_scaler.inverse_transform([y_pred]).tolist()[0]
+
+    def error_for_horizon(self, horizon):
+        return self.errors[horizon]
