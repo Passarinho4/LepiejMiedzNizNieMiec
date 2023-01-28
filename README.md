@@ -1,4 +1,4 @@
-# Witaj w XXX 
+# Witaj w Water Level Estimation Webapp (WLEW) 
 
 To repozytorium zawiera kod części serwerowej odpowiedzialnej za wyznaczanie predykcji poziomu wody na Odrze w miejscowości Głogów. Predykcje generuje model ML uczony na danych historycznych (wejściem są pomiary opadów w stacjach pomiarowych w dorzeczu Odry) oraz odczytach poziomu wody w Głogowie. 
 
@@ -11,7 +11,7 @@ https://mf57.github.io/water-level-estimator-frontend/
 
 ## Struktura aplikacji
 
-XXX jest aplikacją webową z częścią frontendową dostępną w osobnym repozytorium:
+WLEW jest aplikacją webową z częścią frontendową dostępną w osobnym repozytorium:
 
 https://github.com/MF57/water-level-estimator-frontend
 
