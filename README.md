@@ -50,8 +50,22 @@ Nie ma to większego znaczenia, z policzonych korelacji wychodzi, ze bez wieksze
 
 
 ## Model AI
-Do modelu wykorzystana została sieć LSTM składająca się z 6 warstw Long-Short memmory oraz jednej warstwy wyjściowej. 
+Do modelu wykorzystana została sieć neuronowa LSTM.
+Sieć składała się z następujących warstw:
+* 6 warstw LSTM (long short-term memory), przetwarzających w każdym kroku dane z 30 ostatnich dni
+* 6 warstw Dropout, generujacych szum pozwalający na uniknięcie zjawiska nadmiernego dopasowania (overfittingu)
+* 1 jednej warstwy wyjściowej, wyrażającej przewidywany stan rzeki w kolejnym punkcie czasowym
 
+Wejście do sieci stanowiły następujące parametry:
+* Pomiar poziomu wody w ostatnich 30 punktach czasowych
+* Suma opadów we wszystkich stacjach w ostatnich 30 punktach czasowych
+* Średnie opadów w każdym z 7 klastrów stacji pomiarowych w ostatnich 30 punktach czasowych
+* Wartość sinusa oraz cosinusa liczbowej reprezentacji miesiąca, dodana w celu uchwycenia zmian sezonowych
+
+W celu dokonania predykcji na kilka dni do przodu, sieć w sposób iteracyjny:
+1. dokonywała predykcji następnego punktu czasowego
+2. dodawała tę predykcję do zbioru danych wejściowych
+3. powracała do punktu 1.
 
 
  
