@@ -15,9 +15,10 @@ predictor = Predictor()
 
 
 class DataPoint:
-    def __init__(self, date, value):
+    def __init__(self, date, value, error):
         self.date = date
         self.value = value
+self.error = error
 
     def toJSON(self):
         return self.__dict__
@@ -31,7 +32,7 @@ def hello():
 
     predicted = predictor.predict(date_object)
     delta = timedelta(days=1)
-    arr = [DataPoint((date_object + delta * (n + 1)).strftime("%Y-%m-%d"), predicted[n]) for n in range(7)]
+    arr = [DataPoint((date_object + delta * (n + 1)).strftime("%Y-%m-%d"), predicted[n], 1) for n in range(7)]
     data_points_json = [dp.toJSON() for dp in arr]
     return jsonify(data_points_json)
 
