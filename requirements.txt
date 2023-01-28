@@ -11,3 +11,4 @@ tensorflow
 joblib
 sklearn
 scikit-learn
+openpyxl
